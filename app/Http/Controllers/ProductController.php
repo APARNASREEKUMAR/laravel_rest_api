@@ -24,7 +24,7 @@ class ProductController extends Controller
         // echo "</pre>";
 
         // return ProductResource::collection(Product::all());
-        return new ProductCollection(Product::all());
+        return new ProductCollection(Product::paginate(5));
     }
 
     /**
