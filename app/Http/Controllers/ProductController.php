@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\Product;
 use App\Http\Resources\Product\ProductResource;
+use App\Http\Resources\Product\ProductCollection;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -17,10 +18,13 @@ class ProductController extends Controller
     {
         // return "Hello";
         
-        $product= Product::all();
-        echo "<pre>";
-        print_r($product);
-        echo "</pre>";
+        // $product= Product::all();
+        // echo "<pre>";
+        // print_r($product);
+        // echo "</pre>";
+
+        // return ProductResource::collection(Product::all());
+        return new ProductCollection(Product::all());
     }
 
     /**
