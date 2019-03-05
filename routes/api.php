@@ -18,8 +18,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::apiResource('/products','ProductController');
+// Route::apiResource('/products','ProductController')->middleware('auth:api');
 
+// Route::get('products', 'ProductController@index');
+
+// Route::middleware('auth:api')->group( function () {
+// 	Route::apiResource('products', 'ProductController');
+	// Route::post('products', 'ProductController@store');
+// });
+
+Route::apiResource('products', 'ProductController');
 Route::group(['prefix' => 'products'],function(){
 	Route::apiResource('/{product}/reviews','ReviewController');
 });
