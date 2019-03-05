@@ -6,7 +6,8 @@ use App\Model\Product;
 use App\Http\Resources\Product\ProductResource;
 use App\Http\Resources\Product\ProductCollection;
 use Illuminate\Http\Request;
-use Illuminate\Http\Request\ProductRequest;
+use App\Http\Requests\ProductRequest;
+
 class ProductController extends Controller
 {
     /**
@@ -46,7 +47,17 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        return $request->all();
+       $product=new Product;
+       $product->name=$request->name;
+       $product->detail=$request->description;
+       $product->stock=$request->stock;
+       $product->price=$request->price;
+       $product->discount=$request->discount;
+       $product->save();
+       return response([
+        'data' => new ProductResource($product)
+       ],201);
+     // return   $request->all();
     }
 
     /**
@@ -81,7 +92,9 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $request['detail']=$request['description'];
+        unset($request['description']);
+       $product->update($request->all());
     }
 
     /**
